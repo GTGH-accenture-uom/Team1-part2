@@ -1,6 +1,7 @@
 package com.accenuture.project.part2.Team1part2.modules;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Insured {
 
@@ -12,6 +13,8 @@ public class Insured {
     private LocalDate birthdate;
     private String email;
 
+    private List<Insured> insuredList;
+
     //constructors
     public Insured(long afm, long amka, String name, String surname, LocalDate birthdate, String email) {
         this.afm = afm;
@@ -20,6 +23,14 @@ public class Insured {
         this.surname= surname;
         this.birthdate = birthdate;
         this.email = email;
+    }
+
+    public List<Insured> getInsuredList() {
+        return insuredList;
+    }
+
+    public void setInsuredList(List<Insured> insuredList) {
+        this.insuredList = insuredList;
     }
 
     public Insured() { }
@@ -71,4 +82,10 @@ public class Insured {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
+
+
+
+
 }
