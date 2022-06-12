@@ -35,4 +35,8 @@ public class Doctor {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
+
+
+
 }
