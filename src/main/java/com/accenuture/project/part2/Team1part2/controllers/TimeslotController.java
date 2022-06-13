@@ -39,6 +39,5 @@ public class TimeslotController {
 
          return timeslotService.getTimeslotByDate(day, month, year);
 
-
     }
 }
