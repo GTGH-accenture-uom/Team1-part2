@@ -1,4 +1,4 @@
-package com.accenuture.project.part2.Team1part2.modules;
+package com.accenuture.project.part2.Team1part2.models;
 
 import java.time.LocalDate;
 
@@ -14,6 +14,11 @@ public class Vaccination {
         this.doctor = doctor;
         this.vaccinationDate = vaccinationDate;
         this.expirationDate = expirationDate;
+    }
+
+    //////////constructor for method declarationOfVaccination in DoctorService class
+    public Vaccination(int timeslotCode, long amka, LocalDate expirationDate) {
+
     }
 
     //setters

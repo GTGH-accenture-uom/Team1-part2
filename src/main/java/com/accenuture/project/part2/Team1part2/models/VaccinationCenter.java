@@ -1,4 +1,4 @@
-package com.accenuture.project.part2.Team1part2.modules;
+package com.accenuture.project.part2.Team1part2.models;
 
 import java.util.ArrayList;
 import java.util.List;
