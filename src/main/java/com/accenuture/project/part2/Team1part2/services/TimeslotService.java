@@ -24,7 +24,7 @@ public class TimeslotService{
 
        timeslots.add(timeslot);
 
-        return chosenTimeslots;
+        return timeslots;
     }
 
     // CREATE LIST OF TIMESLOTS THAT HAVE BEEN CHOSEN BY CHECKING WITCH TIMESLOTS ARE IN LIST OF RESERVATIONS
@@ -37,11 +37,11 @@ public class TimeslotService{
 
 
         return chosenTimeslots;
-    }
+    }/////////////CHECK UPDATE HAVE TO DELETE DESMEYMENO
 
 
     //  elegxei ean to timeslot  einai keno i oxi
-    public String getTimeslotByDate(int day, int month, int year) {
+    public String  checkTimeslotAvailability(int day, int month, int year) {
 
         for(Timeslot t:  timeslots){
 
@@ -65,4 +65,25 @@ public class TimeslotService{
     }
 
 
+    public List<Timeslot> showAvailableTimeslots(int day, int month, int year) {
+
+        //  if(timeslot day int year ) is available show it
+
+        List<Timeslot> freeTimeslots = new ArrayList<>();
+
+        for (Timeslot t : timeslots) {
+
+            if (t.getDateOfAppointment().getDayOfMonth() == day && t.getDateOfAppointment().getMonthValue() == month &&
+                    t.getDateOfAppointment().getYear() == year) { // chescks if it's in the list a timeslot that exists
+
+
+                    if (!chosenTimeslots.contains(t)) {
+                        freeTimeslots.add(t);
+                    }
+
+
+            }
+        }
+        return freeTimeslots;
+    }
 }

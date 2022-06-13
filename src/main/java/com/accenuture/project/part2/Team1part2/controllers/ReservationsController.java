@@ -19,7 +19,10 @@ public class ReservationsController {
     private ReservationsService reservationsService;
 
     // CREATNG RESERVATION
-    //http://localhost:8181/reservation?amka=3433566&timeslot=t1s&doctor=doctor
+    //http://localhost:8181/reservation?amka=3433566
+
+    /////////////////////////////////////////////////////////
+    ///// SPASE TO
     @PostMapping(path= "/reservation")
     public String makeReservation(@RequestParam(value = "amka") long amka,
                                    @RequestBody Timeslot timeslot,

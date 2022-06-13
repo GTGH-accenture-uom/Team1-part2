@@ -31,3 +31,4 @@ public class DoctorService {
         return "Vaccination declared successfully!";
     }
 }
+
