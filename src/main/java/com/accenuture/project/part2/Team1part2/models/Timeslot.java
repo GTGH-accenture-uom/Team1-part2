@@ -5,10 +5,14 @@ import java.time.LocalTime;
 
 public class Timeslot {
 
-    //private int day;
-    //private int month;
+    /* TA THELEI NA TA PSAXNEI ME SIGKEKRIMENI SEIRA IMEROMINIAS OPOTE DEN NOMIZW NA MAS KANEI I LOCAL DATE OPOTE TO
+                KANW KANONIKA
+     */
+
+   // private int day;
+   // private int month;
     //private int year;
-    //instead of the above we could do:
+     //instead of the above we could do :
     private LocalDate dateOfAppointment;
 
     //private int hour;
@@ -18,11 +22,13 @@ public class Timeslot {
 
     private int startMinute;
     private int endMinute;
-    private Doctor doctor;
+    private Doctor doctor ;
 
-    private boolean reserved = false;
+    int timeslotCode; /////////// for doctor vaccination  kai na to doume genika ama xreiazetai na to prostesoume
 
     //constructor
+
+
     public Timeslot(LocalDate dateOfAppointment, LocalTime timeOfAppointment, int startMinute, int endMinute, Doctor doctor) {
         this.dateOfAppointment = dateOfAppointment;
         this.timeOfAppointment = timeOfAppointment;
@@ -31,63 +37,53 @@ public class Timeslot {
         this.doctor = doctor;
     }
 
-    //setters
-//    public void setDoctor(Doctor doctor) {
-//        this.doctor = doctor;
-//    }
-//
-//    public void setStartMinute(int startMinute) {
-//        this.startMinute = startMinute;
-//    }
-//
-//    public void setEndMinute(int endMinute) {
-//        this.endMinute = endMinute;
-//    }
-//
-//    public void setDateOfAppointment(LocalDate date_of_appointment) {
-//        this.dateOfAppointment = dateOfAppointment;
-//    }
-//
-//    public void setTimeOfAppointment(LocalTime timeOfAppointment) {
-//        this.timeOfAppointment = timeOfAppointment;
-//    }
-
-    //getters
-    public int getStartMinute() {
-        return startMinute;
+    public int getTimeslotCode() {
+        return timeslotCode;
     }
 
-    public int getEndMinute() {
-        return endMinute;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
+    public void setTimeslotCode(int timeslotCode) {
+        this.timeslotCode = timeslotCode;
     }
 
     public LocalDate getDateOfAppointment() {
         return dateOfAppointment;
     }
 
+    public void setDateOfAppointment(LocalDate dateOfAppointment) {
+        this.dateOfAppointment = dateOfAppointment;
+    }
+
     public LocalTime getTimeOfAppointment() {
         return timeOfAppointment;
     }
 
-    @Override
-    public String toString() {
-        return  "TimeSlot[ " +
-                "Date:" + dateOfAppointment +
-                ", Time:" + timeOfAppointment +
-                ", startMin:" + startMinute +
-                ", endMin:" + endMinute +
-                ", " + doctor +
-                " ]";
+    public void setTimeOfAppointment(LocalTime timeOfAppointment) {
+        this.timeOfAppointment = timeOfAppointment;
     }
 
-    public boolean isReserved() { return reserved; }
+    public int getStartMinute() {
+        return startMinute;
+    }
 
-    public void reserve() { this.reserved = true; }
+    public void setStartMinute(int startMinute) {
+        this.startMinute = startMinute;
+    }
 
-    public void unReserve() { this.reserved = false; }
+    public int getEndMinute() {
+        return endMinute;
+    }
+
+    public void setEndMinute(int endMinute) {
+        this.endMinute = endMinute;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
 
 }

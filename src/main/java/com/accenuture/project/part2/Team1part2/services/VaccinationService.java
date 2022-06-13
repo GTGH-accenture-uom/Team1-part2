@@ -26,15 +26,19 @@ public class VaccinationService {
         for(Vaccination v : vaccinations) {
             if (v.getInsured().getAmka()==defAmka & v.getExpirationDate().isAfter(LocalDate.now()))
             {
-               return "You have vaccine coverage!";
+               return "You have vaccine coverage!" +v.getExpirationDate();
 
             }
             else if(!(v.getInsured().getAmka()==defAmka)){
-                System.out.println("Their is no person insured with the AMKA you've submitted! ");
+                throw new IllegalStateException("Their is no person insured with the AMKA you've submitted! ");
             }
+            else if(v.getInsured().getAmka()==defAmka & v.getExpirationDate().isBefore(LocalDate.now())) {
+                return "You don't have vaccine coverage! You're vaccines expiration date was: " + v.getExpirationDate();
+            }
+
         }
 
-        return "You don't have vaccine coverage!";
+      return " ";
 
     }
 }
