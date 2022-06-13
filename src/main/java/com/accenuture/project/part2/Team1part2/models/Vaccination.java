@@ -58,4 +58,5 @@ public class Vaccination {
                 ", Expiration at: " + expirationDate +
                 " ]";
     }
+
 }
