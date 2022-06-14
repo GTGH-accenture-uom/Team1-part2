@@ -17,7 +17,7 @@ public class TimeslotController {
     @PostMapping("/timeslot")
     public String makeTimeslots(@RequestBody Timeslot timeslot){
 
-         timeslotService.createTimeslots(timeslot);
+        timeslotService.createTimeslots(timeslot);
         return "Timeslot created!";
     }
 
@@ -30,14 +30,27 @@ public class TimeslotController {
     }
 
 
-    // CHECKS IF TIMESLOT WITH SPECIFIC DATE IS FREE OR NOT
+    // CHECKS IF day has free timeslots
     //http://localhost:8080/timeslot?day=01&month=2&year=2022
     @GetMapping(path="/timeslot")
-    public String searchTimeslotByDate(@RequestParam(value = "day") int day,
+    public String searchTimeslotBAvailability(@RequestParam(value = "day") int day,
                                          @RequestParam(value = "month") int month,
                                          @RequestParam(value = "year") int year){
 
-         return timeslotService.getTimeslotByDate(day, month, year);
+         return timeslotService.checkTimeslotAvailability(day, month, year);
 
     }
+
+    /// DISPLAYS THE FREE TIMESLOTS OF SPECIFIC DATE
+    //http://localhost:8080/timeslot?day=01&month=2&year=2022
+    @GetMapping(path="/timeslot/available")
+    public List<Timeslot> showAvailableTimeslots(@RequestParam(value = "day") int day,
+                                            @RequestParam(value = "month") int month,
+                                            @RequestParam(value = "year") int year){
+
+        return timeslotService.showAvailableTimeslots(day, month, year);
+
+    }
+
+
 }

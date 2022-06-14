@@ -21,7 +21,7 @@ public class ReservationsService {
 
 // CREATES RESERVATION AND PUTS IT IN LIST RESERVATION LIST
 
-    public Reservation createReservation(long amka, Timeslot timeslot, Doctor doctor) {
+    public Reservation createReservation(long amka, Timeslot timeslot) {
 
         Insured insured1 = null;
 
@@ -31,10 +31,11 @@ public class ReservationsService {
                 insured1 = insuredPerson;
             }
         }
-        Reservation resv = new Reservation(insured1, timeslot, doctor);// create reservation with that inured perspn and
+        Reservation resv = new Reservation(insured1, timeslot, timeslot.getDoctor());// create reservation with that inured perspn and
         reservationList.add(resv);                                     // add him to list
 
         return resv;
+
 
     }
 
@@ -43,7 +44,11 @@ public class ReservationsService {
     }
 
 
-    public String updateReservation(Reservation reservation, Timeslot timeslot, Doctor doctor) {
+
+
+    /*public String updateReservation(Reservation reservation, Timeslot timeslot, Doctor doctor) {
+
+
 
         int counter = reservation.getReservationsChanges();
         counter = 0;
@@ -53,6 +58,8 @@ public class ReservationsService {
             while (reservation.getReservationsChanges() < 2) {
 
                 if (reservationList.contains(reservation.getInsured())) { // ama iparxei idi klesimeno rantevou me idio insuured
+
+                     reservationList.remove(reservation); //// prin dilwnei kainourio  reservation diagrafei ton proigoume
                     reservation1 = createReservation(reservation.getInsured().getAmka(), timeslot, doctor);
 
 
@@ -67,7 +74,7 @@ public class ReservationsService {
             }
         }
         return " ";
-    }
+    }*/
 
     // returns a list of upcoming reservations
     public List<Reservation> upcomingReservations() {

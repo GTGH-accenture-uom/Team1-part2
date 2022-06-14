@@ -24,7 +24,12 @@ public class Timeslot {
     private int endMinute;
     private Doctor doctor ;
 
-    int timeslotCode; /////////// for doctor vaccination  kai na to doume genika ama xreiazetai na to prostesoume
+    public int timeslotCode; /////////// for doctor vaccination  kai na to doume genika ama xreiazetai na to prostesoume
+
+    private static int addTimeslotCode=0;
+
+    private boolean reserved =false;
+
 
     //constructor
 
@@ -35,6 +40,8 @@ public class Timeslot {
         this.startMinute = startMinute;
         this.endMinute = endMinute;
         this.doctor = doctor;
+        timeslotCode= ++ addTimeslotCode;  // kathe fora pou tha dimiourgeitai ena timeslot tha auksanetai to timeslot code kata ena
+                //prwta auksanoume kai meta arxeiopoioume
     }
 
     public int getTimeslotCode() {
@@ -84,6 +91,13 @@ public class Timeslot {
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
+
+
+    public boolean isReserved() { return reserved; }
+
+    public void reserve() { this.reserved = true; }
+
+    public void unReserve() { this.reserved = false; }
 
 
 }

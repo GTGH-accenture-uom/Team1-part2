@@ -12,8 +12,11 @@ public class TimeslotService{
 
     @Autowired
             ReservationsService reservationsService;
+
     List<Timeslot> timeslots = new ArrayList<>();
     List<Timeslot> chosenTimeslots = new ArrayList<>();
+
+
 
     public List<Timeslot> getTimeslots() {
         return timeslots;
@@ -22,9 +25,15 @@ public class TimeslotService{
     //Creates timeslots and puts them in list
     public List<Timeslot> createTimeslots(Timeslot timeslot) {
 
-       timeslots.add(timeslot);
+      /* int addtimeslotcode =  timeslot.getTimeslotCode();  //getting the timeslot code for each timeslot created
 
-        return chosenTimeslots;
+        addtimeslotcode=addtimeslotcode++;      //changing the timeslot code for each timeslot created +1 each time
+
+       timeslot.setTimeslotCode(addtimeslotcode);// setting the timeslot code for each timeslot*/
+       timeslots.add(timeslot);
+       timeslot.reserve();
+
+        return timeslots;
     }
 
     // CREATE LIST OF TIMESLOTS THAT HAVE BEEN CHOSEN BY CHECKING WITCH TIMESLOTS ARE IN LIST OF RESERVATIONS
@@ -37,32 +46,47 @@ public class TimeslotService{
 
 
         return chosenTimeslots;
-    }
+    }/////////////CHECK UPDATE HAVE TO DELETE DESMEYMENO
 
 
     //  elegxei ean to timeslot  einai keno i oxi
-    public String getTimeslotByDate(int day, int month, int year) {
+    public String  checkTimeslotAvailability(int day, int month, int year) {
 
-        for(Timeslot t:  timeslots){
+        String results = null;
+        for (Timeslot t : timeslots) {
 
-            if(t.getDateOfAppointment().getDayOfMonth()==day && t.getDateOfAppointment().getMonthValue()==month &&
-                    t.getDateOfAppointment().getYear()==year){ // chescks if it's in the list a timeslot that exists
-                for(Timeslot t1: chosenTimeslots){
-                    if(t1.getDateOfAppointment().getDayOfMonth()!=day && t1.getDateOfAppointment().getMonthValue()!=month &&
-                            t1.getDateOfAppointment().getYear()!=year){// checks that it is not an already chosen timeslot
-                        //chosenTimeslots.add(t); //  puts the
-                        return "This timeslot is free for use!";
-
-                    }
+            if (t.getDateOfAppointment().getDayOfMonth() == day && t.getDateOfAppointment().getMonthValue() == month &&
+                    t.getDateOfAppointment().getYear() == year) { // chescks if it's in the list a timeslot that exists
+                if (t.isReserved()) {
+                    results="not null";
+                    return "This timeslot is not free for use!";
                 }
             }
-            else{
-               // throw new RuntimeException("That timeslot doesn't exist");
-                throw new IllegalStateException("That timeslot doesn't exist");
-            }
         }
-        return "This timeslot is not free for use! Please chose another one";
+        if(results==null) {
+            return "This timeslot is not free for use! Please chose another one";
+        }
+
+        return "";
     }
 
 
+    public List<Timeslot> showAvailableTimeslots(int day, int month, int year) {
+
+        //  if(timeslot day int year ) is available show it
+
+        List<Timeslot> freeTimeslots = new ArrayList<>();
+
+        for (Timeslot t : timeslots) {
+
+            if (t.getDateOfAppointment().getDayOfMonth() == day && t.getDateOfAppointment().getMonthValue() == month &&
+                    t.getDateOfAppointment().getYear() == year) { // chescks if it's in the list a timeslot that exists
+
+                    if (!chosenTimeslots.contains(t)) {
+                        freeTimeslots.add(t);
+                    }
+            }
+        }
+        return freeTimeslots;
+    }
 }

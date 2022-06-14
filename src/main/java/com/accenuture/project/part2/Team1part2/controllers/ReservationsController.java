@@ -19,13 +19,16 @@ public class ReservationsController {
     private ReservationsService reservationsService;
 
     // CREATNG RESERVATION
-    //http://localhost:8181/reservation?amka=3433566&timeslot=t1s&doctor=doctor
-    @PostMapping(path= "/reservation")
-    public String makeReservation(@RequestParam(value = "amka") long amka,
-                                   @RequestBody Timeslot timeslot,
-                                   @RequestBody Doctor doctor){
+    //http://localhost:8181/reservation?amka=3433566
 
-        reservationsService.createReservation(amka,timeslot,doctor);
+    /////////////////////////////////////////////////////////
+    ///// SPASE TO
+    @PostMapping(path= "/reservation/{givenamka}")
+    public String makeReservation(@PathVariable(value = "givenamka") long amka,
+                                  @RequestBody Timeslot timeslot
+                                   ){
+
+        reservationsService.createReservation(amka,timeslot);
         return "Reservation created successfully!";
     }
 
@@ -49,13 +52,13 @@ public class ReservationsController {
 
 
     // UPDATING RESERVATION
-    @PutMapping(path= "/reservation")
+   /* @PutMapping(path= "/reservation")
     public String changeReservation(@RequestBody Reservation reservation,
                                          @RequestBody Timeslot timeslot,
                                          @RequestBody Doctor doctor) {
 
             return reservationsService.updateReservation(reservation,timeslot,doctor);
 
-    }
+    }*/
 
 }
