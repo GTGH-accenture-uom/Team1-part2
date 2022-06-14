@@ -5,7 +5,6 @@ import com.accenuture.project.part2.Team1part2.services.TimeslotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Time;
 import java.util.List;
 
 @RestController
@@ -18,7 +17,7 @@ public class TimeslotController {
     @PostMapping("/timeslot")
     public String makeTimeslots(@RequestBody Timeslot timeslot){
 
-         timeslotService.createTimeslots(timeslot);
+        timeslotService.createTimeslots(timeslot);
         return "Timeslot created!";
     }
 

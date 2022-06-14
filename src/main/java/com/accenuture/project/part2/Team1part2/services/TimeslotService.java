@@ -12,8 +12,11 @@ public class TimeslotService{
 
     @Autowired
             ReservationsService reservationsService;
+
     List<Timeslot> timeslots = new ArrayList<>();
     List<Timeslot> chosenTimeslots = new ArrayList<>();
+
+
 
     public List<Timeslot> getTimeslots() {
         return timeslots;
@@ -22,7 +25,13 @@ public class TimeslotService{
     //Creates timeslots and puts them in list
     public List<Timeslot> createTimeslots(Timeslot timeslot) {
 
+      /* int addtimeslotcode =  timeslot.getTimeslotCode();  //getting the timeslot code for each timeslot created
+
+        addtimeslotcode=addtimeslotcode++;      //changing the timeslot code for each timeslot created +1 each time
+
+       timeslot.setTimeslotCode(addtimeslotcode);// setting the timeslot code for each timeslot*/
        timeslots.add(timeslot);
+       timeslot.reserve();
 
         return timeslots;
     }
@@ -43,25 +52,22 @@ public class TimeslotService{
     //  elegxei ean to timeslot  einai keno i oxi
     public String  checkTimeslotAvailability(int day, int month, int year) {
 
-        for(Timeslot t:  timeslots){
+        String results = null;
+        for (Timeslot t : timeslots) {
 
-            if(t.getDateOfAppointment().getDayOfMonth()==day && t.getDateOfAppointment().getMonthValue()==month &&
-                    t.getDateOfAppointment().getYear()==year){ // chescks if it's in the list a timeslot that exists
-                for(Timeslot t1: chosenTimeslots){
-                    if(t1.getDateOfAppointment().getDayOfMonth()!=day && t1.getDateOfAppointment().getMonthValue()!=month &&
-                            t1.getDateOfAppointment().getYear()!=year){// checks that it is not an already chosen timeslot
-                        //chosenTimeslots.add(t); //  puts the
-                        return "This timeslot is free for use!";
-
-                    }
+            if (t.getDateOfAppointment().getDayOfMonth() == day && t.getDateOfAppointment().getMonthValue() == month &&
+                    t.getDateOfAppointment().getYear() == year) { // chescks if it's in the list a timeslot that exists
+                if (t.isReserved()) {
+                    results="not null";
+                    return "This timeslot is not free for use!";
                 }
             }
-            else{
-               // throw new RuntimeException("That timeslot doesn't exist");
-                throw new IllegalStateException("That timeslot doesn't exist");
-            }
         }
-        return "This timeslot is not free for use! Please chose another one";
+        if(results==null) {
+            return "This timeslot is not free for use! Please chose another one";
+        }
+
+        return "";
     }
 
 
@@ -76,12 +82,9 @@ public class TimeslotService{
             if (t.getDateOfAppointment().getDayOfMonth() == day && t.getDateOfAppointment().getMonthValue() == month &&
                     t.getDateOfAppointment().getYear() == year) { // chescks if it's in the list a timeslot that exists
 
-
                     if (!chosenTimeslots.contains(t)) {
                         freeTimeslots.add(t);
                     }
-
-
             }
         }
         return freeTimeslots;

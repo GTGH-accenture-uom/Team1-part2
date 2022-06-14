@@ -1,6 +1,7 @@
 package com.accenuture.project.part2.Team1part2.services;
 
 import com.accenuture.project.part2.Team1part2.models.Insured;
+import com.accenuture.project.part2.Team1part2.models.Reservation;
 import com.accenuture.project.part2.Team1part2.models.Timeslot;
 import com.accenuture.project.part2.Team1part2.models.Vaccination;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import java.util.List;
 @Service
 public class DoctorService {
 
+    @Autowired
+            ReservationsService reservationsService;
 
     Insured insured;// gonna get amka
 
@@ -24,9 +27,17 @@ public class DoctorService {
 
         Vaccination vaccination; // creating vaccination
 
-        vaccination= new Vaccination( timeslot.getTimeslotCode(),insured.getAmka(),expirationDate);
+        vaccination= new Vaccination( timeslotCode,amka,expirationDate);
 
         listOfDeclaredVaccinations.add(vaccination);
+        // afou ginei o emboliasmos diafrafetai to reservation pou eixe kanei
+        for(Reservation r: reservationsService.getReservationList()){
+            if(r.getInsured().getAmka()== amka){
+                r.getTimeslot().unReserve();
+                reservationsService.getReservationList().remove(r);
+                break;
+            }
+        }
 
         return "Vaccination declared successfully!";
     }
