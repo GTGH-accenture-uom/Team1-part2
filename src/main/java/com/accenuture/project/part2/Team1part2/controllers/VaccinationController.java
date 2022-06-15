@@ -18,6 +18,6 @@ public class VaccinationController {
     public String checkingVaccinationStatus(@RequestParam(value = "defAmka") long amka){
 
         return vaccinationService.checkVaccinationStatus(vaccinationService.getVaccinations(), amka);
-
     }
+
 }

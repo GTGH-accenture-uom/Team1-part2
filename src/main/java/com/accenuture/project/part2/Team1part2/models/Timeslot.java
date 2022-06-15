@@ -22,7 +22,7 @@ public class Timeslot implements Serializable {
     private Doctor doctor ;
 
     public int timeslotCode;
-    private static int addTimeslotCode=0;
+    private static int addTimeslotCode = 0;
 
     private boolean reserved = false;
 
@@ -33,7 +33,8 @@ public class Timeslot implements Serializable {
         this.startMinute = startMinute;
         this.endMinute = endMinute;
         this.doctor = doctor;
-        timeslotCode= ++ addTimeslotCode;
+
+        timeslotCode = ++ addTimeslotCode;
     }
 
     public boolean isReserved() { return reserved; }

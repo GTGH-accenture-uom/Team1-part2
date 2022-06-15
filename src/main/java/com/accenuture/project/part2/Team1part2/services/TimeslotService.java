@@ -37,8 +37,7 @@ public class TimeslotService{
         }
 
         return chosenTimeslots;
-    }/////////////CHECK UPDATE HAVE TO DELETE DESMEYMENO
-
+    }
 
     //given (int day, int month, int year), checks if timeslot is reserved
     public String checkTimeslotAvailability(int day, int month, int year) {

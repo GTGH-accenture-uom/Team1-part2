@@ -19,7 +19,7 @@ public class DoctorService {
     //declare a vaccination, then unreserve timeslot and remove reservation from their lists
     public String declarationOfVaccination(DeclaredVaccination declaredVaccination) {
 
-        declaredVaccination = new DeclaredVaccination( declaredVaccination.getTimeslotCode(),declaredVaccination.getAmka(),
+        declaredVaccination = new DeclaredVaccination( declaredVaccination.getTimeslotCode(), declaredVaccination.getAmka(),
                 declaredVaccination.getExpirationDate());
 
         listOfDeclaredVaccinations.add(declaredVaccination);
@@ -39,5 +39,6 @@ public class DoctorService {
     public List<DeclaredVaccination> getListOfDeclaredVaccinations(){
         return listOfDeclaredVaccinations;
     }
+
 }
 

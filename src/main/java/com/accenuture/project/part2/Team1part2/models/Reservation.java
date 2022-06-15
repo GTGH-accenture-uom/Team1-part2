@@ -1,6 +1,5 @@
 package com.accenuture.project.part2.Team1part2.models;
 
-
 import java.io.Serializable;
 
 public class Reservation implements Serializable {
@@ -16,6 +15,8 @@ public class Reservation implements Serializable {
         this.timeslot = timeslot;
     }
 
+    public void increaseReservationsChanges() { reservationsChanges++; }
+
     //getters
     public Insured getInsured() {
         return insured;
@@ -28,7 +29,5 @@ public class Reservation implements Serializable {
     public int getReservationsChanges() {
         return reservationsChanges;
     }
-
-    public void increaseReservationsChanges() { reservationsChanges++; }
 
 }

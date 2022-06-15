@@ -2,8 +2,8 @@ package com.accenuture.project.part2.Team1part2.models;
 
 public class TimeslotInsured {  //created to make a reservation with one @Body
 
-     Insured insured;
-     Timeslot timeslot;
+    private Insured insured;
+    private Timeslot timeslot;
 
     public TimeslotInsured(Insured insured, Timeslot timeslot) {
         this.insured = insured;

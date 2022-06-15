@@ -20,13 +20,14 @@ public class Team1part2Application {
 	public static List<Timeslot> timeslots2 = new ArrayList<>();
 	public static List<VaccinationCenter> vaccinationCenters = new ArrayList<VaccinationCenter>();
 	public static List<Reservation> reservations = new ArrayList<>();
-	//public static	List<Vaccination> vaccinations = new ArrayList<>();
+	public static List<Vaccination> vaccinations = new ArrayList<>();
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 
 		FileOutputStream fos = new FileOutputStream("examples.ser");
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
 
+		//--------------------------------------------------------------------------------------------------------------
 		//CREATE 15 INSURED PEOPLE AND ADD THEM TO AN ARRAYLIST
 		Insured i1 = new Insured(121212121L, 26029799999L, "Megan", "Fox", LocalDate.of(1950, 1, 1), "mf@gmail.com");
 		Insured i2 = new Insured(123456789L, 12121212121L, "Tom", "Hardy", LocalDate.of(1951, 2, 2), "th@gmail.com");
@@ -62,6 +63,7 @@ public class Team1part2Application {
 
 		oos.writeObject(insuredList);
 
+		//--------------------------------------------------------------------------------------------------------------
 		//CREATE 4 DOCTORS AND ADD THEM TO AN ARRAYLIST
 		Doctor doc1 = new Doctor(17453283745L, "Dr.Markos", "Seferlis");
 		Doctor doc2 = new Doctor(25623432411L, "Dr.Anna", "Korakaki");
@@ -75,6 +77,7 @@ public class Team1part2Application {
 
 		oos.writeObject(doctors);
 
+		//--------------------------------------------------------------------------------------------------------------
 		//CREATE AND FILL 2 TIMESLOTS, ONE FOR EACH VACC.CENTER
 		for (int d = 20; d < 22; d++) {
 
@@ -107,6 +110,7 @@ public class Team1part2Application {
 		oos.writeObject(timeslots1);
 		oos.writeObject(timeslots2);
 
+		//--------------------------------------------------------------------------------------------------------------
 		//CREATE 2 VACC.CENTERS AND ADD THEM TO AN ARRAYLIST
 		VaccinationCenter ippokratio = new VaccinationCenter("Ippokrateio GNTH", "Egnatias 223", timeslots1);
 		VaccinationCenter axepa = new VaccinationCenter("AXEPA PN", "Kiriakidi 1", timeslots2);
@@ -116,6 +120,7 @@ public class Team1part2Application {
 
 		oos.writeObject(vaccinationCenters);
 
+		//--------------------------------------------------------------------------------------------------------------
 		//CREATE 8 RESERVATIONS AND ADD THEM TO AN ARRAYLIST
 		Reservation reservation1 = new Reservation(i1, timeslots1.get(0));
 		Reservation reservation2 = new Reservation(i2, timeslots1.get(2));
@@ -137,8 +142,8 @@ public class Team1part2Application {
 
 		oos.writeObject(vaccinationCenters);
 
-//---------------------------------------------------------------------------------------------
-//		//CREATE 6 VACCINATIONS AND ADD THEM TO AN ARRAYLIST
+		//--------------------------------------------------------------------------------------------------------------
+		//CREATE 6 VACCINATIONS AND ADD THEM TO AN ARRAYLIST
 //		Vaccination vac1 = reservation1.getTimeslot().getDoctor().vaccinate(reservation1.getInsured(),
 //				reservation1.getTimeslot().getDoctor(),
 //				reservation1.getTimeslot().getDateOfAppointment(),
@@ -170,29 +175,32 @@ public class Team1part2Application {
 //      vaccinations.add(vac4);
 //      vaccinations.add(vac5);
 //      vaccinations.add(vac6);
-//---------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
-//---------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
+
+//----------------------------------------------------------------------------------------------------------------------
+
+//		oos.close();
+//		fos.close();
+
+		SpringApplication.run(Team1part2Application.class, args);
+
 //		FileInputStream fis = new FileInputStream("examples.ser");
 //		ObjectInputStream ois = new ObjectInputStream(fis);
 //
-//		insuredPeople = (List<Insured>) ois.readObject();
+//		insuredList = (List<Insured>) ois.readObject();
 //		doctors = (List<Doctor>) ois.readObject();
 //		timeslots1 = (List<Timeslot>) ois.readObject();
 //		timeslots2 = (List<Timeslot>) ois.readObject();
 //		vaccinationCenters = (List<VaccinationCenter>) ois.readObject();
-//---------------------------------------------------------------------------------------------
 
-		oos.close();
-		fos.close();
-
+		System.out.println("\nChecking....");
 		System.out.println("ADDED!!! Number of insured is: " + insuredList.get(0).getName());
 		System.out.println("ADDED!!! Number of doctors is: " + doctors.size());
 		System.out.println("ADDED!!! Number of timeslots1 is: " + timeslots1.get(3).getTimeslotCode());
 		System.out.println("ADDED!!! Number of timeslots2 is: " + timeslots2.size());
 		System.out.println("ADDED!!! Number of Vacc.Centers is: " + vaccinationCenters.get(1).getAddress());
-
-		SpringApplication.run(Team1part2Application.class, args);
 
 	}
 }

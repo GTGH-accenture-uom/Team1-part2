@@ -93,24 +93,20 @@ public class ReservationsService {
     }
 
     //update reservation
-    public String updateReservation(Reservation reservation, TimeslotInsured timeslotInsured) {
+    public String updateReservation(ReservationTimeslotInsured reservationTimeslotInsured) {
 
-        Reservation res = null;
+        if (reservations.contains(reservationTimeslotInsured.getInsured()) & reservationTimeslotInsured.getReservation().getReservationsChanges() < 2) {
 
-        if (reservations.contains(reservation.getInsured()) & reservation.getReservationsChanges() < 2) {
+            reservationTimeslotInsured.getReservation().increaseReservationsChanges();
+            reservations.remove(reservationTimeslotInsured.getReservation());
 
-            reservation.increaseReservationsChanges();
-            reservations.remove(reservation);
-
-            //NEED reservationTimeslotInsured Class in ReservationsController
-            res = createReservation(reservationTimeslotInsured.get(timeslotInsured));
-
-            return "Reservation updated successfully!";
+            //We need a ReservationTimeslotInsured Class in ReservationsController
+            return createReservation( reservationTimeslotInsured.getTimeslotInsured() );
 
         } else {
-            if (!reservations.contains(reservation.getInsured())) {
+            if (!reservations.contains(reservationTimeslotInsured.getInsured())) {
                 return "Reservation given does not exist!";
-            } else if (reservation.getReservationsChanges() >= 2) {
+            } else if (reservationTimeslotInsured.getReservation().getReservationsChanges() >= 2) {
                 return "You have already changed your appointment twice!";
             } else {
                 return "!!!!!!ERROR!!!!!!";
@@ -118,79 +114,4 @@ public class ReservationsService {
         }
     }
 
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//        for (Insured insuredPerson : insuredList) {
-//
-//            if (reservation.getReservationsChanges() < 2) {
-//
-//                if (reservations.contains(reservation.getInsured())) { // ama iparxei idi klesimeno rantevou me idio insuured
-//
-//                    reservations.remove(reservation); //// prin dilwnei kainourio  reservation diagrafei ton proigoume
-//                    res = createReservation(reservation.getInsured().getAmka(), timeslot, doctor);
-//
-//
-//                    if (res != null) {   // efoson ginei o emboliasmos  tote na auksithei o counter alliws oxi se periptwsi sfalmatoa
-//                        counter++;
-//                        reservation.setReservationsChanges(counter);// wste na enimerwnetai gia kathe insured poses allages ekane
-//                        return "Reservation updated!";
-//                    } else {
-//                        throw new RuntimeException();
-//                    }
-//                }
-//            }
-//            else
-//            { return "You have already changed your appointment twice"; }
-//
-//        }
-//        return " ";
-//    }
-//}
-//
-//
-//
-
-
-    /// updating reservation
-//    public Reservation updateReservation(ReservationTimeslot reservationTimeslot) {
-//        Insured insured1 = null;
-//
-//        Reservation reservation1;
-//
-//        for (Insured insuredPerson : insuredList) {
-//
-//            if (insuredPerson.getAmka() == reservationTimeslot.getReservation().getInsured().getAmka()) {
-//                reservation1 = createReservation(new TimeslotInsured(reservationTimeslot.getReservation().getInsured()),reservationTimeslot.getReservation().getTimeslot())
-//               int counter= reservation.getReservationsChanges()++;
-//            }
-//            else{
-//                throw new IllegalStateException("There is no person insured with that amka");
-//            }
-//        }
-//
-//        return reservation;
-//    }
-
-
-
-

@@ -47,9 +47,8 @@ public class ReservationsController{
 
     //update reservation
     @PutMapping(path="/editReservation")
-    public String changeReservation(@            ){
-
-            return reservationsService.updateReservation(reservationTimeslot);
+    public String editReservation(@RequestBody ReservationTimeslotInsured reservationTimeslotInsured){
+            return reservationsService.updateReservation(reservationTimeslotInsured);
 
     }
 
