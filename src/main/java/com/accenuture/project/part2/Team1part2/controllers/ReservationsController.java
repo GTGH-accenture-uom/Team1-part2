@@ -1,9 +1,6 @@
 package com.accenuture.project.part2.Team1part2.controllers;
 
-import com.accenuture.project.part2.Team1part2.models.Doctor;
-import com.accenuture.project.part2.Team1part2.models.Reservation;
-import com.accenuture.project.part2.Team1part2.models.Timeslot;
-import com.accenuture.project.part2.Team1part2.models.Insured;
+import com.accenuture.project.part2.Team1part2.models.*;
 import com.accenuture.project.part2.Team1part2.services.ReservationsService;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +16,10 @@ public class ReservationsController {
     private ReservationsService reservationsService;
 
     // CREATNG RESERVATION
-    //http://localhost:8181/reservation?amka=3433566
+    @PostMapping(path= "/reservation")
+    public String makeReservation(@RequestBody TimeslotInsured timeslotInsured){
 
-    /////////////////////////////////////////////////////////
-    ///// SPASE TO
-    @PostMapping(path= "/reservation/{givenamka}")
-    public String makeReservation(@PathVariable(value = "givenamka") long amka,
-                                  @RequestBody Timeslot timeslot
-                                   ){
-
-        reservationsService.createReservation(amka,timeslot);
-        return "Reservation created successfully!";
+        return reservationsService.createReservation(timeslotInsured);
     }
 
     // returns all upcoming reservations
@@ -39,25 +29,33 @@ public class ReservationsController {
         return reservationsService.upcomingReservations();
     }
 
-    //return reservations of specific day by giving body of local date
+    //gets all reservations
+    @GetMapping(path="/reservation/all")
+    public List<Reservation> reservationsAll(){
 
-    //@JsonFormat(pattern="yyyy-MM-dd")
+        return reservationsService.getReservationList();
+    }
 
-    //http://localhost:8080/reservation/day?date=
-    @GetMapping(path ="/reservation/day")
-    public List<Reservation> showReservationsOfDay(@RequestParam(value= "date") LocalDate date){
-        return reservationsService.reservationsOfDay(date);
 
+
+    //return reservations of specific day by inputting day, month,year
+
+    //http://localhost:8080/reservation/day?day=31&month=08&year=2022
+
+    @GetMapping(path="/reservation/day")
+    public List<Reservation> showReservationsOfDay(@RequestParam(value = "day") int day,
+                                                 @RequestParam(value = "month") int month,
+                                                 @RequestParam(value = "year") int year) {
+
+        return reservationsService.reservationsOfDay(day, month, year);
     }
 
 
     // UPDATING RESERVATION
-   /* @PutMapping(path= "/reservation")
-    public String changeReservation(@RequestBody Reservation reservation,
-                                         @RequestBody Timeslot timeslot,
-                                         @RequestBody Doctor doctor) {
+   /*/@PutMapping(path= "/reservation")
+    public String changeReservation(@            ){
 
-            return reservationsService.updateReservation(reservation,timeslot,doctor);
+            return reservationsService.updateReservation(reservationTimeslot);
 
     }*/
 

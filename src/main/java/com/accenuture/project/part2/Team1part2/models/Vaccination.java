@@ -16,10 +16,6 @@ public class Vaccination {
         this.expirationDate = expirationDate;
     }
 
-    //////////constructor for method declarationOfVaccination in DoctorService class
-    public Vaccination(int timeslotCode, long amka, LocalDate expirationDate) {
-
-    }
 
     //setters
     public void setInsured(Insured insured) {
