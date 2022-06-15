@@ -16,24 +16,6 @@ public class Vaccination {
         this.expirationDate = expirationDate;
     }
 
-
-    //setters
-    public void setInsured(Insured insured) {
-        this.insured = insured;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
-    }
-
-    public void setVaccinationDate(LocalDate vaccinationDate) {
-        this.vaccinationDate = vaccinationDate;
-    }
-
-    public void setExpirationDate(LocalDate expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
     //getters
     public Insured getInsured() {return insured;}
 
@@ -45,14 +27,6 @@ public class Vaccination {
 
     public LocalDate getExpirationDate() {
         return expirationDate;
-    }
-
-    @Override
-    public String toString() {
-        return  "Vaccination[ " +
-                "Vaccination Date: " + vaccinationDate +
-                ", Expiration at: " + expirationDate +
-                " ]";
     }
 
 }

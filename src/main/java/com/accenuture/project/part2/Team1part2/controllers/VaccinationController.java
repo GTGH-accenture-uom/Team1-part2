@@ -12,10 +12,7 @@ public class VaccinationController {
     @Autowired
     private VaccinationService vaccinationService;
 
-
-
-
-    //CHECKING VACCINATION STATUS////////////////
+    //check vaccination status with amka given
     //http://localhost:8080/vaccination/12125690876
     @GetMapping(path = "/vaccination/{defAmka}")
     public String checkingVaccinationStatus(@RequestParam(value = "defAmka") long amka){

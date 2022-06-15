@@ -10,19 +10,18 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-public class ReservationsController {
+public class ReservationsController{
 
     @Autowired
     private ReservationsService reservationsService;
 
-    // CREATNG RESERVATION
+    //make a reservation
     @PostMapping(path= "/reservation")
     public String makeReservation(@RequestBody TimeslotInsured timeslotInsured){
-
         return reservationsService.createReservation(timeslotInsured);
     }
 
-    // returns all upcoming reservations
+    //returns all upcoming reservations
     @GetMapping(path="/reservation")
     public List<Reservation> showUpcomingReservations(){
 
@@ -36,27 +35,22 @@ public class ReservationsController {
         return reservationsService.getReservationList();
     }
 
-
-
     //return reservations of specific day by inputting day, month,year
-
     //http://localhost:8080/reservation/day?day=31&month=08&year=2022
-
     @GetMapping(path="/reservation/day")
     public List<Reservation> showReservationsOfDay(@RequestParam(value = "day") int day,
                                                  @RequestParam(value = "month") int month,
                                                  @RequestParam(value = "year") int year) {
-
         return reservationsService.reservationsOfDay(day, month, year);
     }
 
 
-    // UPDATING RESERVATION
-   /*/@PutMapping(path= "/reservation")
-    public String changeReservation(@            ){
-
-            return reservationsService.updateReservation(reservationTimeslot);
-
-    }*/
+//    //update reservation
+//    @PutMapping(path= "/reservation")
+//    public String changeReservation(@            ){
+//
+//            return reservationsService.updateReservation(reservationTimeslot);
+//
+//    }
 
 }

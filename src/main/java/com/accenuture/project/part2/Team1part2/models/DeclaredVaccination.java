@@ -8,36 +8,24 @@ public class DeclaredVaccination {
     private long amka;
     private LocalDate expirationDate;
 
-
-    //////////constructor for method declarationOfVaccination in DoctorService class
-
+    //constructor for declarationOfVaccination() in DoctorService class
     public DeclaredVaccination(int timeslotCode, long amka, LocalDate expirationDate) {
         this.timeslotCode = timeslotCode;
         this.amka = amka;
         this.expirationDate = expirationDate;
     }
 
+    //getters
     public int getTimeslotCode() {
         return timeslotCode;
-    }
-
-    public void setTimeslotCode(int timeslotCode) {
-        this.timeslotCode = timeslotCode;
     }
 
     public long getAmka() {
         return amka;
     }
 
-    public void setAmka(long amka) {
-        this.amka = amka;
-    }
-
     public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
-        this.expirationDate = expirationDate;
-    }
 }

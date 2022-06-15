@@ -12,31 +12,31 @@ import java.util.List;
 public class DoctorService {
 
     @Autowired
-            ReservationsService reservationsService;
+    ReservationsService reservationsService;
 
-    List<DeclaredVaccination> listOfDeclaredVaccinations=new ArrayList<>();
+    List<DeclaredVaccination> listOfDeclaredVaccinations = new ArrayList<>();
 
+    //declare a vaccination, then unreserve timeslot and remove reservation from their lists
     public String declarationOfVaccination(DeclaredVaccination declaredVaccination) {
-
 
         declaredVaccination = new DeclaredVaccination( declaredVaccination.getTimeslotCode(),declaredVaccination.getAmka(),
                 declaredVaccination.getExpirationDate());
 
         listOfDeclaredVaccinations.add(declaredVaccination);
-        // afou ginei o emboliasmos diafrafetai to reservation pou eixe kanei
-        for(Reservation r: reservationsService.getReservationList()){
-            if(r.getInsured().getAmka()== declaredVaccination.getAmka()){
+
+        for(Reservation r : reservationsService.getReservationList()){
+            if(r.getInsured().getAmka() == declaredVaccination.getAmka()){
                 r.getTimeslot().unReserve();
                 reservationsService.getReservationList().remove(r);
                 break;
             }
         }
 
-        return "Vaccination declared successfully!";
+        return "Vaccination declared successfully!!!";
+
     }
 
     public List<DeclaredVaccination> getListOfDeclaredVaccinations(){
-
         return listOfDeclaredVaccinations;
     }
 }

@@ -9,9 +9,6 @@ import java.util.List;
 @Service
 public class VaccinationService {
 
-
-
-
     public List<Vaccination> getVaccinations() {
         return vaccinations;
     }
@@ -21,24 +18,26 @@ public class VaccinationService {
     }
 
     List<Vaccination> vaccinations;
-// checking vaccination status
-    public String checkVaccinationStatus( List<Vaccination> vaccinations, Long defAmka){
-        for(Vaccination v : vaccinations) {
-            if (v.getInsured().getAmka()==defAmka & v.getExpirationDate().isAfter(LocalDate.now()))
-            {
-               return "You have vaccine coverage!" +v.getExpirationDate();
 
+    // checking vaccination status
+    public String checkVaccinationStatus( List<Vaccination> vaccinations, Long defAmka){
+
+        for(Vaccination v : vaccinations) {
+
+            if (v.getInsured().getAmka() == defAmka & v.getExpirationDate().isAfter(LocalDate.now()))
+            {
+               return "You have vaccine coverage! Expires at: " + v.getExpirationDate();
             }
             else if(!(v.getInsured().getAmka()==defAmka)){
-                throw new IllegalStateException("Their is no person insured with the AMKA you've submitted! ");
+                throw new IllegalStateException("Their is no person insured with the AMKA you've submitted!");
             }
             else if(v.getInsured().getAmka()==defAmka & v.getExpirationDate().isBefore(LocalDate.now())) {
-                return "You don't have vaccine coverage! You're vaccines expiration date was: " + v.getExpirationDate();
+                return "You don't have vaccine coverage! Your vaccine coverage expired at: " + v.getExpirationDate();
             }
 
         }
 
-      return " ";
+      return "";
 
     }
 }

@@ -1,9 +1,11 @@
 package com.accenuture.project.part2.Team1part2.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VaccinationCenter {
+public class VaccinationCenter implements Serializable {
+
     private String code;
     private String address;
 
@@ -15,27 +17,17 @@ public class VaccinationCenter {
         this.timeslots = timeslots;
     }
 
+    //getters
     public String getCode() {
         return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public List<Timeslot> getTimeslots() {
         return timeslots;
     }
 
-    public void setTimeslots(List<Timeslot> timeslots) {
-        this.timeslots = timeslots;
-    }
 }

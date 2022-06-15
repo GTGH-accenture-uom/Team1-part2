@@ -1,6 +1,8 @@
 package com.accenuture.project.part2.Team1part2.models;
 
-public class Doctor {
+import java.io.Serializable;
+
+public class Doctor implements Serializable {
 
     private long amka;
     private String name;
@@ -12,31 +14,17 @@ public class Doctor {
         this.surname = doctor_surname;
     }
 
+    //getters
     public long getAmka() {
         return amka;
-    }
-
-    public void setAmka(long amka) {
-        this.amka = amka;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSurname() {
         return surname;
     }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-
-
 
 }

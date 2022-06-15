@@ -1,19 +1,17 @@
 package com.accenuture.project.part2.Team1part2.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Insured {
+public class Insured implements Serializable {
 
-// XREIAZOMASTE OLI TIN PLIROFORIA???
     private long afm;
     private long amka;
     private String name;
     private String surname;
     private LocalDate birthdate;
     private String email;
-
-
 
     //constructors
     public Insured(long afm, long amka, String name, String surname, LocalDate birthdate, String email) {
@@ -25,67 +23,17 @@ public class Insured {
         this.email = email;
     }
 
-    //public List<Insured> getInsuredList() {
-     //   return insuredList;
-   // }
+    //getters
+    public long getAfm() {return afm;}
 
-  //  public void setInsuredList(List<Insured> insuredList) {
-    //    this.insuredList = insuredList;
-   // }
+    public long getAmka() {return amka;}
 
-    public Insured() { }
+    public String getName() {return name;}
 
-    public long getAfm() {
-        return afm;
-    }
+    public String getSurname() {return surname;}
 
-    public void setAfm(long afm) {
-        this.afm = afm;
-    }
+    public LocalDate getBirthdate() {return birthdate;}
 
-    public long getAmka() {
-        return amka;
-    }
-
-    public void setAmka(long amka) {
-        this.amka = amka;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
-
-
-
+    public String getEmail() {return email;}
 
 }

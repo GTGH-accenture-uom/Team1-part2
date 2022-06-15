@@ -11,23 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class InsuredControllers {
+public class InsuredController{
 
     @Autowired
     private InsuredService insuredService;
 
-
     @PostMapping("/insured")
     public String createInsuredPerson(@RequestBody Insured insured){
-
       return insuredService.createInsured(insured);
-
     }
 
     @GetMapping("/insured")
     public List<Insured> ShowInsuredList(){
-
         return insuredService.getInsured();
     }
+
 }
 
