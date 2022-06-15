@@ -1,6 +1,5 @@
 package com.accenuture.project.part2.Team1part2.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Reservation {
 
@@ -8,28 +7,22 @@ public class Reservation {
     private Insured insured;
 
 
-    private Timeslot timeslot;
+   private Timeslot timeslot;
 
-    private Doctor doctor; // gia to createReservatrion
+    private Doctor doctor; // gia to createReservatrion*/
 
-    private int reservationsChanges; // to kanei set kathe fora wste na krataei otan ginei allagi akomi kai otan bgei
+    private int reservationsChanges=0; // to kanei set kathe fora wste na krataei otan ginei allagi akomi kai otan bgei
                                     // apo update// blepe reservation service
 
-    public Doctor getDoctor() {
+    /*public Doctor getDoctor() {
         return doctor;
     }
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
-    }
+    }*/
 
-    public int getReservationsChanges() {
-        return reservationsChanges;
-    }
 
-    public void setReservationsChanges(int reservationsChanges) {
-       this.reservationsChanges = reservationsChanges;
-    }
 
     public Reservation(Insured insured, Timeslot timeslot) {
         this.insured = insured;
@@ -38,13 +31,6 @@ public class Reservation {
 
     public Reservation() {
 
-    }
-
-    //gia to create Reservation
-    public Reservation(Insured insured, Timeslot timeslot, Doctor doctor) {
-        this.insured = insured;
-        this.timeslot = timeslot;
-        this.doctor = doctor;
     }
 
     public Insured getInsured() {
@@ -61,5 +47,13 @@ public class Reservation {
 
     public void setTimeslot(Timeslot timeslot) {
         this.timeslot = timeslot;
+    }
+
+    public int getReservationsChanges() {
+        return reservationsChanges;
+    }
+
+    public void setReservationsChanges(int reservationsChanges) {
+        this.reservationsChanges = reservationsChanges;
     }
 }

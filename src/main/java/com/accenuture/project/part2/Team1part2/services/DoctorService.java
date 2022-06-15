@@ -1,9 +1,6 @@
 package com.accenuture.project.part2.Team1part2.services;
 
-import com.accenuture.project.part2.Team1part2.models.Insured;
-import com.accenuture.project.part2.Team1part2.models.Reservation;
-import com.accenuture.project.part2.Team1part2.models.Timeslot;
-import com.accenuture.project.part2.Team1part2.models.Vaccination;
+import com.accenuture.project.part2.Team1part2.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,22 +14,18 @@ public class DoctorService {
     @Autowired
             ReservationsService reservationsService;
 
-    Insured insured;// gonna get amka
+    List<DeclaredVaccination> listOfDeclaredVaccinations=new ArrayList<>();
 
-    Timeslot timeslot ; // gonna get timeslotCode
+    public String declarationOfVaccination(DeclaredVaccination declaredVaccination) {
 
-    List<Vaccination> listOfDeclaredVaccinations=new ArrayList<>();
 
-    public String declarationOfVaccination(int timeslotCode, long amka, LocalDate expirationDate) {
+        declaredVaccination = new DeclaredVaccination( declaredVaccination.getTimeslotCode(),declaredVaccination.getAmka(),
+                declaredVaccination.getExpirationDate());
 
-        Vaccination vaccination; // creating vaccination
-
-        vaccination= new Vaccination( timeslotCode,amka,expirationDate);
-
-        listOfDeclaredVaccinations.add(vaccination);
+        listOfDeclaredVaccinations.add(declaredVaccination);
         // afou ginei o emboliasmos diafrafetai to reservation pou eixe kanei
         for(Reservation r: reservationsService.getReservationList()){
-            if(r.getInsured().getAmka()== amka){
+            if(r.getInsured().getAmka()== declaredVaccination.getAmka()){
                 r.getTimeslot().unReserve();
                 reservationsService.getReservationList().remove(r);
                 break;
@@ -40,6 +33,11 @@ public class DoctorService {
         }
 
         return "Vaccination declared successfully!";
+    }
+
+    public List<DeclaredVaccination> getListOfDeclaredVaccinations(){
+
+        return listOfDeclaredVaccinations;
     }
 }
 
