@@ -39,18 +39,18 @@ public class ReservationsController{
     //http://localhost:8080/reservation/day?day=31&month=08&year=2022
     @GetMapping(path="/reservation/day")
     public List<Reservation> showReservationsOfDay(@RequestParam(value = "day") int day,
-                                                 @RequestParam(value = "month") int month,
-                                                 @RequestParam(value = "year") int year) {
+                                                   @RequestParam(value = "month") int month,
+                                                   @RequestParam(value = "year") int year) {
         return reservationsService.reservationsOfDay(day, month, year);
     }
 
 
-//    //update reservation
-//    @PutMapping(path= "/reservation")
-//    public String changeReservation(@            ){
-//
-//            return reservationsService.updateReservation(reservationTimeslot);
-//
-//    }
+    //update reservation
+    @PutMapping(path="/editReservation")
+    public String changeReservation(@            ){
+
+            return reservationsService.updateReservation(reservationTimeslot);
+
+    }
 
 }

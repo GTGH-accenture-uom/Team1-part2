@@ -25,15 +25,12 @@ public class ReservationsService {
             timeslotInsured.getTimeslot().reserve(); //reserve timeslot chosen
 
             return "Reservation created successfully!!!";
-        }
-        else {
-            if(!insuredList.contains(timeslotInsured.getInsured())) {   //if insured was not found
+        } else {
+            if (!insuredList.contains(timeslotInsured.getInsured())) {   //if insured was not found
                 return "Didn't find insured!!!";
-            }
-            else if (timeslotInsured.getTimeslot().isReserved()){   //if timeslot is reserved
+            } else if (timeslotInsured.getTimeslot().isReserved()) {   //if timeslot is reserved
                 return "Timeslot is reserved!!!";
-            }
-            else{
+            } else {
                 return "!!!!!!!!!ERROR!!!!!!!!!!!!!!";   //all other cases
             }
         }
@@ -69,7 +66,7 @@ public class ReservationsService {
     }
 
     // returns a list of reservations at specific date
-    public List<Reservation> reservationsOfDay(int day,int month,int year) {
+    public List<Reservation> reservationsOfDay(int day, int month, int year) {
 
         //creates list that will hold reservations at specific date
         List<Reservation> reservationDayList = new ArrayList<>();
@@ -82,9 +79,9 @@ public class ReservationsService {
 
                 // ckecks if the reservation in the list of reservations has a specific date in its timeslot
 
-                if (reservations.get(i).getTimeslot().getDateOfAppointment().getDayOfMonth()==day&&
-                        reservations.get(i).getTimeslot().getDateOfAppointment().getMonthValue()==month&&
-                        reservations.get(i).getTimeslot().getDateOfAppointment().getYear()==year){// ckecks if ths reservation in the list
+                if (reservations.get(i).getTimeslot().getDateOfAppointment().getDayOfMonth() == day &&
+                        reservations.get(i).getTimeslot().getDateOfAppointment().getMonthValue() == month &&
+                        reservations.get(i).getTimeslot().getDateOfAppointment().getYear() == year) {// ckecks if ths reservation in the list
                     checkReservation = reservations.get(i);
 
                     reservationDayList.add(checkReservation);
@@ -94,60 +91,106 @@ public class ReservationsService {
         }
         return reservationDayList;
     }
-}
 
+    //update reservation
+    public String updateReservation(Reservation reservation, TimeslotInsured timeslotInsured) {
 
+        Reservation res = null;
 
-    /*public String updateReservation(Reservation reservation, Timeslot timeslot, Doctor doctor) {
+        if (reservations.contains(reservation.getInsured()) & reservation.getReservationsChanges() < 2) {
 
+            reservation.increaseReservationsChanges();
+            reservations.remove(reservation);
 
+            //NEED reservationTimeslotInsured Class in ReservationsController
+            res = createReservation(reservationTimeslotInsured.get(timeslotInsured));
 
-        int counter = reservation.getReservationsChanges();
-        counter = 0;
+            return "Reservation updated successfully!";
 
-        Reservation reservation1 = null;
-        for (Insured insuredPerson : insuredList) {
-            while (reservation.getReservationsChanges() < 2) {
-
-                if (reservationList.contains(reservation.getInsured())) { // ama iparxei idi klesimeno rantevou me idio insuured
-
-                     reservationList.remove(reservation); //// prin dilwnei kainourio  reservation diagrafei ton proigoume
-                    reservation1 = createReservation(reservation.getInsured().getAmka(), timeslot, doctor);
-
-
-                    if (reservation1 != null) {   // efoson ginei o emboliasmos  tote na auksithei o counter alliws oxi se periptwsi sfalmatoa
-                        counter++;
-                        reservation.setReservationsChanges(counter);// wste na enimerwnetai gia kathe insured poses allages ekane
-                        return "Reservation updated!";
-                    } else {
-                        throw new RuntimeException("You have already changed your appointment twice");
-                    }
-                }
+        } else {
+            if (!reservations.contains(reservation.getInsured())) {
+                return "Reservation given does not exist!";
+            } else if (reservation.getReservationsChanges() >= 2) {
+                return "You have already changed your appointment twice!";
+            } else {
+                return "!!!!!!ERROR!!!!!!";
             }
         }
-        return " ";
-    }*/
-
-/// updating reservation
-   /* public Reservation updateReservation(ReservationTimeslot reservationTimeslot) {
-        Insured insured1 = null;
-
-        Reservation reservation1;
-
-        for (Insured insuredPerson : insuredList) {
-
-            if (insuredPerson.getAmka() == reservationTimeslot.getReservation().getInsured().getAmka()) {
-                reservation1 = createReservation(new TimeslotInsured(reservationTimeslot.getReservation().getInsured()),reservationTimeslot.getReservation().getTimeslot())
-               int counter= reservation.getReservationsChanges()++;
-            }
-            else{
-                throw new IllegalStateException("There is no person insured with that amka");
-            }
-        }
-
-        return reservation;
     }
+
+
 }
 
 
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//        for (Insured insuredPerson : insuredList) {
+//
+//            if (reservation.getReservationsChanges() < 2) {
+//
+//                if (reservations.contains(reservation.getInsured())) { // ama iparxei idi klesimeno rantevou me idio insuured
+//
+//                    reservations.remove(reservation); //// prin dilwnei kainourio  reservation diagrafei ton proigoume
+//                    res = createReservation(reservation.getInsured().getAmka(), timeslot, doctor);
+//
+//
+//                    if (res != null) {   // efoson ginei o emboliasmos  tote na auksithei o counter alliws oxi se periptwsi sfalmatoa
+//                        counter++;
+//                        reservation.setReservationsChanges(counter);// wste na enimerwnetai gia kathe insured poses allages ekane
+//                        return "Reservation updated!";
+//                    } else {
+//                        throw new RuntimeException();
+//                    }
+//                }
+//            }
+//            else
+//            { return "You have already changed your appointment twice"; }
+//
+//        }
+//        return " ";
+//    }
+//}
+//
+//
+//
+
+
+    /// updating reservation
+//    public Reservation updateReservation(ReservationTimeslot reservationTimeslot) {
+//        Insured insured1 = null;
+//
+//        Reservation reservation1;
+//
+//        for (Insured insuredPerson : insuredList) {
+//
+//            if (insuredPerson.getAmka() == reservationTimeslot.getReservation().getInsured().getAmka()) {
+//                reservation1 = createReservation(new TimeslotInsured(reservationTimeslot.getReservation().getInsured()),reservationTimeslot.getReservation().getTimeslot())
+//               int counter= reservation.getReservationsChanges()++;
+//            }
+//            else{
+//                throw new IllegalStateException("There is no person insured with that amka");
+//            }
+//        }
+//
+//        return reservation;
+//    }
+
+
+
+

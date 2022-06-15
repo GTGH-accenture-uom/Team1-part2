@@ -29,11 +29,6 @@ public class Reservation implements Serializable {
         return reservationsChanges;
     }
 
-
-//    private Doctor doctor; // needed for createReservation?
-//
-//    public Doctor getDoctor() {
-//        return doctor;
-//    }
+    public void increaseReservationsChanges() { reservationsChanges++; }
 
 }
