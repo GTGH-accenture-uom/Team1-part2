@@ -19,37 +19,8 @@ public class ReservationsService {
 
     private List<Reservation> reservationList = new ArrayList<>(reservations);
 
-    //make a reservation
-    /*public String createReservation(TimeslotInsured timeslotInsured) {
 
-        int i,y;
-        for(i=0;i< insuredList.size();i++) {
-            if(insuredList.get(i).equals(timeslotInsured.getInsuredPerson())){ //(ind.getAmka() == timeslotInsured.getInsuredPerson().getAmka()) {
-                this.testerInsured = insuredList.get(i);
-
-            }
-//            else if(!insuredList.get(i).equals(timeslotInsured.getInsuredPerson())){
-//                return "The insured person you have inouted doenst exist";
-//            }
-        }
-        for(y=0;y< timeslots1.size();y++){
-            if(timeslots1.get(i).equals(timeslotInsured.getTimeslotTim())){
-                this.testerTimeslot=timeslots1.get(i);
-                timeslots1.get(i).reserve(); // to timeslot me to opoio ginetai to reservation ginetai reserved
-            }
-//            else{
-//                return "The timeslot you have chosen doesnt exist ";
-//            }
-
-        }
-
-        Reservation res = new Reservation(testerInsured, testerTimeslot);
-        reservationList.add(res);
-
-
-        return "Reservation created successfully!!!";
-
-    }*/
+    // Creating reservation
     public String createReservation(long amka, int timeslotcode) {
 
         int i, y;
@@ -81,22 +52,6 @@ public class ReservationsService {
 
     }
 
-
-//if insured person given exists
-    //  if (insuredList.contains(timeslotInsured.getInsured()) && !timeslotInsured.getTimeslot().isReserved()) {
-
-
-//       } else {
-//            if (!insuredList.contains(timeslotInsured.getInsured())) {   //if insured was not found
-//                return "Didn't find insured!!!";
-//            } else if (timeslotInsured.getTimeslot().isReserved()) {   //if timeslot is reserved
-//                return "Timeslot is reserved!!!";
-//            } else {
-//                return "!!!!!!!!!ERROR!!!!!!!!!!!!!!";   //all other cases
-//            }
-//        }
-
-    //}
 
     //returns all reservations
     public List<Reservation> getReservationList() {
@@ -155,30 +110,45 @@ public class ReservationsService {
         }
         return reservationDayList;
     }
+
+    //uodating reservation by giving new desired timeslotcode and inputing the previous reservation
+    public String editReservation(int newtimeslotCode, Reservation reservation){
+
+        Timeslot checking=null;
+
+        Reservation updatedReservation;
+        if(reservations.contains(reservation) && reservation.getReservationsChanges()<2){
+            reservation.increaseReservationsChanges();
+            reservations.remove(reservation);
+
+            for(Timeslot tm: timeslots1){
+                if(timeslots1.contains(newtimeslotCode)){
+                    checking =tm;
+                }
+                else{
+                    return " Their is no available timeslot with that timslote code";
+                }
+            }
+
+
+            updatedReservation=new Reservation(reservation.getInsured(),checking);
+
+            reservations.add(updatedReservation);
+
+        }
+        if (!reservationList.contains(reservation)) {
+            return "Reservation given does not exist!";
+        }
+        if (reservation.getReservationsChanges() >= 2) {
+            return "You have already changed your appointment twice!";
+        }
+
+        return " Error!!";
+    }
 }
 
-/*
-    //update reservation
-    public String updateReservation(ReservationTimeslotInsured reservationTimeslotInsured) {
 
-        if (reservationList.contains(reservationTimeslotInsured.getInsured()) & reservationTimeslotInsured.getReservation1().
-                getReservationsChanges() < 2) {
 
-            reservationTimeslotInsured.getReservation1().increaseReservationsChanges();
-            reservationList.remove(reservationTimeslotInsured.getReservation1());
 
-            //We need a ReservationTimeslotInsured Class in ReservationsController
-        //    return createReservation( reservationTimeslotInsured.getTimeslotInsured() );
 
-        } else {
-            if (!reservationList.contains(reservationTimeslotInsured.getInsured())) {
-                return "Reservation given does not exist!";
-            } else if (reservationTimeslotInsured.getReservation1().getReservationsChanges() >= 2) {
-                return "You have already changed your appointment twice!";
-            } else {
-                return "!!!!!!ERROR!!!!!!";
-            }
-        }
-    }
 
-}*/

@@ -61,4 +61,12 @@ public class ReservationsController{
 
     }*/
 
+    //update reservation
+    @PutMapping(path="reservation/edit")
+    public String editReservation(@RequestParam(value="newtimeslotCode") int newtimeslotCode,
+                                  @RequestBody Reservation reservation){
+
+        return reservationsService.editReservation(newtimeslotCode,reservation);
+    }
+
 }
