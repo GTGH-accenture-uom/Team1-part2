@@ -36,4 +36,27 @@ public class Insured implements Serializable {
 
     public String getEmail() {return email;}
 
+    public void setAfm(long afm) {
+        this.afm = afm;
+    }
+
+    public void setAmka(long amka) {
+        this.amka = amka;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

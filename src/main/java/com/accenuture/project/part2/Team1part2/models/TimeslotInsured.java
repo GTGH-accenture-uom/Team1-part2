@@ -19,4 +19,11 @@ public class TimeslotInsured {  //created to make a reservation with one @Body
         return timeslotTim;
     }
 
+    public void setInsuredPerson(Insured insuredPerson) {
+        this.insuredPerson = insuredPerson;
+    }
+
+    public void setTimeslotTim(Timeslot timeslotTim) {
+        this.timeslotTim = timeslotTim;
+    }
 }

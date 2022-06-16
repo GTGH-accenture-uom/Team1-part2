@@ -187,19 +187,17 @@ public class Team1part2Application {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-//		oos.close();
-//		fos.close();
-
+		oos.close();
+		fos.close();
 		SpringApplication.run(Team1part2Application.class, args);
+/*
+		FileInputStream fis = new FileInputStream("examples.ser");
+		ObjectInputStream ois = new ObjectInputStream(fis);
 
-//		FileInputStream fis = new FileInputStream("examples.ser");
-//		ObjectInputStream ois = new ObjectInputStream(fis);
-//
-//		insuredList = (List<Insured>) ois.readObject();
-//		doctors = (List<Doctor>) ois.readObject();
-//		timeslots1 = (List<Timeslot>) ois.readObject();
-//		timeslots2 = (List<Timeslot>) ois.readObject();
-//		vaccinationCenters = (List<VaccinationCenter>) ois.readObject();
+		insuredList = (List<Insured>) ois.readObject();
+		doctors = (List<Doctor>) ois.readObject();
+		timeslots1 = (List<Timeslot>) ois.readObject();
+		vaccinationCenters = (List<VaccinationCenter>) ois.readObject();*/
 
 		System.out.println("\nChecking....");
 		System.out.println("ADDED!!! Number of insured is: " + insuredList.get(0).getName());

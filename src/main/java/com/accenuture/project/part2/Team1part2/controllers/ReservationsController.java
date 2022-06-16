@@ -2,11 +2,9 @@ package com.accenuture.project.part2.Team1part2.controllers;
 
 import com.accenuture.project.part2.Team1part2.models.*;
 import com.accenuture.project.part2.Team1part2.services.ReservationsService;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -16,10 +14,21 @@ public class ReservationsController{
     private ReservationsService reservationsService;
 
     //make a reservation
-    @PostMapping(path= "/reservation")
-    public String makeReservation(@RequestBody TimeslotInsured timeslotInsured){
+    /*@PostMapping(path= "/reservation")
+    public String makeReservation(@RequestBody TimeslotInsured timeslotInsured) throws Exception {
+        if (timeslotInsured.getInsuredPerson() == null) {
+            throw new Exception("insured not found.");
+        }
         return reservationsService.createReservation(timeslotInsured);
+    }*/
+
+    @PostMapping(path = "/reservation")
+    public String createReservation(@RequestParam(value = "amka") long  amka,
+                                    @RequestParam(value = "timeslotcode") int timeslotcode){
+
+        return reservationsService.createReservation(amka, timeslotcode);
     }
+
 
     //returns all upcoming reservations
     @GetMapping(path="/reservation")
@@ -46,10 +55,10 @@ public class ReservationsController{
 
 
     //update reservation
-    @PutMapping(path="/editReservation")
+    /*@PutMapping(path="/editReservation")
     public String editReservation(@RequestBody ReservationTimeslotInsured reservationTimeslotInsured){
             return reservationsService.updateReservation(reservationTimeslotInsured);
 
-    }
+    }*/
 
 }

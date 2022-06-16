@@ -12,20 +12,20 @@ import java.util.List;
 import static com.accenuture.project.part2.Team1part2.Team1part2Application.*;
 
 @Service
-public class ReservationsService{
+public class ReservationsService {
 
-    Insured testerInsured;
-    Timeslot testerTimeslot;
+    private Insured testerInsured;
+    private Timeslot testerTimeslot;
 
     private List<Reservation> reservationList = new ArrayList<>(reservations);
 
     //make a reservation
-    public String createReservation(TimeslotInsured timeslotInsured) {
+    /*public String createReservation(TimeslotInsured timeslotInsured) {
 
         int i,y;
         for(i=0;i< insuredList.size();i++) {
             if(insuredList.get(i).equals(timeslotInsured.getInsuredPerson())){ //(ind.getAmka() == timeslotInsured.getInsuredPerson().getAmka()) {
-                testerInsured = insuredList.get(i);
+                this.testerInsured = insuredList.get(i);
 
             }
 //            else if(!insuredList.get(i).equals(timeslotInsured.getInsuredPerson())){
@@ -34,8 +34,38 @@ public class ReservationsService{
         }
         for(y=0;y< timeslots1.size();y++){
             if(timeslots1.get(i).equals(timeslotInsured.getTimeslotTim())){
-                testerTimeslot=timeslots1.get(i);
+                this.testerTimeslot=timeslots1.get(i);
                 timeslots1.get(i).reserve(); // to timeslot me to opoio ginetai to reservation ginetai reserved
+            }
+//            else{
+//                return "The timeslot you have chosen doesnt exist ";
+//            }
+
+        }
+
+        Reservation res = new Reservation(testerInsured, testerTimeslot);
+        reservationList.add(res);
+
+
+        return "Reservation created successfully!!!";
+
+    }*/
+    public String createReservation(long amka, int timeslotcode) {
+
+        int i, y;
+        for (i = 0; i < insuredList.size(); i++) {
+            if (insuredList.get(i).getAmka() == amka) { //(ind.getAmka() == timeslotInsured.getInsuredPerson().getAmka()) {
+                this.testerInsured = insuredList.get(i);
+
+            }
+//            else if(!insuredList.get(i).equals(timeslotInsured.getInsuredPerson())){
+//                return "The insured person you have inouted doenst exist";
+//            }
+        }
+        for (y = 0; y < timeslots1.size(); y++) {
+            if (timeslots1.get(y).getTimeslotCode() == timeslotcode) {
+                this.testerTimeslot = timeslots1.get(y);
+                timeslots1.get(y).reserve(); // to timeslot me to opoio ginetai to reservation ginetai reserved
             }
 //            else{
 //                return "The timeslot you have chosen doesnt exist ";
@@ -72,9 +102,11 @@ public class ReservationsService{
     public List<Reservation> getReservationList() {
         return reservationList;
     }
+
     List<Reservation> upcomingReservationsList = new ArrayList<>();
+
     // returns upcoming reservations
-    public List<Reservation> upcomingReservations(){
+    public List<Reservation> upcomingReservations() {
 
         //create the list that will hold the upcoming reservations after the check
 
@@ -95,11 +127,12 @@ public class ReservationsService{
 
         return upcomingReservationsList;
     }
+
     //creates list that will hold reservations at specific date
     List<Reservation> reservationDayList = new ArrayList<>();
+
     // returns a list of reservations at specific date
     public List<Reservation> reservationsOfDay(int day, int month, int year) {
-
 
 
         Reservation checkReservation = null;   //used to  hold the days reservsation and then pass it in the list
@@ -122,7 +155,9 @@ public class ReservationsService{
         }
         return reservationDayList;
     }
+}
 
+/*
     //update reservation
     public String updateReservation(ReservationTimeslotInsured reservationTimeslotInsured) {
 
@@ -133,7 +168,7 @@ public class ReservationsService{
             reservationList.remove(reservationTimeslotInsured.getReservation1());
 
             //We need a ReservationTimeslotInsured Class in ReservationsController
-            return createReservation( reservationTimeslotInsured.getTimeslotInsured() );
+        //    return createReservation( reservationTimeslotInsured.getTimeslotInsured() );
 
         } else {
             if (!reservationList.contains(reservationTimeslotInsured.getInsured())) {
@@ -146,4 +181,4 @@ public class ReservationsService{
         }
     }
 
-}
+}*/
