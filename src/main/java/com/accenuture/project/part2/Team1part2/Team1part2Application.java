@@ -14,13 +14,11 @@ import java.util.List;
 public class Team1part2Application {
 
 	//all our lists accessible
-	public static List<Insured> insuredList = new ArrayList<Insured>();
+	public static List<Insured> insuredList = new ArrayList<>();
 	public static List<Doctor> doctors = new ArrayList<>();
 	public static List<Timeslot> timeslots1 = new ArrayList<>();
-	public static List<Timeslot> timeslots2 = new ArrayList<>();
-	public static List<VaccinationCenter> vaccinationCenters = new ArrayList<VaccinationCenter>();
+	public static List<VaccinationCenter> vaccinationCenters = new ArrayList<>();
 	public static List<Reservation> reservations = new ArrayList<>();
-	public static List<Vaccination> vaccinations = new ArrayList<>();
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
 
@@ -100,7 +98,7 @@ public class Team1part2Application {
 					Timeslot t1 = new Timeslot(LocalDate.of(2022, 6, d), LocalTime.of(h, mins), mins, mins + 19, tempd1);
 					Timeslot t2 = new Timeslot(LocalDate.of(2022, 6, d), LocalTime.of(h, mins), mins, mins + 19, tempd2);
 					timeslots1.add(t1);
-					timeslots2.add(t2);
+					timeslots1.add(t2);
 					slotsPerDay--;
 					if (slotsPerDay == 0) break;
 				}
@@ -108,12 +106,12 @@ public class Team1part2Application {
 		}
 
 		oos.writeObject(timeslots1);
-		oos.writeObject(timeslots2);
+		//oos.writeObject(timeslots2);
 
 		//--------------------------------------------------------------------------------------------------------------
 		//CREATE 2 VACC.CENTERS AND ADD THEM TO AN ARRAYLIST
 		VaccinationCenter ippokratio = new VaccinationCenter("Ippokrateio GNTH", "Egnatias 223", timeslots1);
-		VaccinationCenter axepa = new VaccinationCenter("AXEPA PN", "Kiriakidi 1", timeslots2);
+		VaccinationCenter axepa = new VaccinationCenter("AXEPA PN", "Kiriakidi 1", timeslots1);
 
 		vaccinationCenters.add(ippokratio);
 		vaccinationCenters.add(axepa);
@@ -123,13 +121,21 @@ public class Team1part2Application {
 		//--------------------------------------------------------------------------------------------------------------
 		//CREATE 8 RESERVATIONS AND ADD THEM TO AN ARRAYLIST
 		Reservation reservation1 = new Reservation(i1, timeslots1.get(0));
+		timeslots1.get(0).reserve();
 		Reservation reservation2 = new Reservation(i2, timeslots1.get(2));
+		timeslots1.get(2).reserve();
 		Reservation reservation3 = new Reservation(i3, timeslots1.get(4));
+		timeslots1.get(4).reserve();
 		Reservation reservation4 = new Reservation(i4, timeslots1.get(6));
+		timeslots1.get(6).reserve();
 		Reservation reservation5 = new Reservation(i5, timeslots1.get(1));
+		timeslots1.get(1).reserve();
 		Reservation reservation6 = new Reservation(i6, timeslots1.get(3));
+		timeslots1.get(3).reserve();
 		Reservation reservation7 = new Reservation(i7, timeslots1.get(5));
+		timeslots1.get(5).reserve();
 		Reservation reservation8 = new Reservation(i8, timeslots1.get(7));
+		timeslots1.get(7).reserve();
 
 		reservations.add(reservation1);
 		reservations.add(reservation2);
@@ -140,7 +146,7 @@ public class Team1part2Application {
 		reservations.add(reservation7);
 		reservations.add(reservation8);
 
-		oos.writeObject(vaccinationCenters);
+		oos.writeObject(reservations);
 
 		//--------------------------------------------------------------------------------------------------------------
 		//CREATE 6 VACCINATIONS AND ADD THEM TO AN ARRAYLIST
@@ -199,7 +205,7 @@ public class Team1part2Application {
 		System.out.println("ADDED!!! Number of insured is: " + insuredList.get(0).getName());
 		System.out.println("ADDED!!! Number of doctors is: " + doctors.size());
 		System.out.println("ADDED!!! Number of timeslots1 is: " + timeslots1.get(3).getTimeslotCode());
-		System.out.println("ADDED!!! Number of timeslots2 is: " + timeslots2.size());
+	//	System.out.println("ADDED!!! Number of timeslots2 is: " + timeslots.size());
 		System.out.println("ADDED!!! Number of Vacc.Centers is: " + vaccinationCenters.get(1).getAddress());
 
 	}

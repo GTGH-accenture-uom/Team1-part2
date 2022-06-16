@@ -13,10 +13,16 @@ public class DoctorController {
     @Autowired
     DoctorService doctorService;
 
-    @PostMapping(path="/doctor")
+   /* @PostMapping(path="/doctor")
     public String declareVaccination(@RequestBody DeclaredVaccination declaredVaccination) {
         return doctorService.declarationOfVaccination(declaredVaccination);
-    }
+    }*/
+
+   /* @PostMapping(path="/doctor")
+    public String declareVaccination(@RequestBody DeclaredVaccination declaredVaccination) {
+        return doctorService.declarationOfVaccination(declaredVaccination);
+    }*/
+
 
     @GetMapping(path ="/doctor")
     public List<DeclaredVaccination> getAllDeclaredVaccination(){

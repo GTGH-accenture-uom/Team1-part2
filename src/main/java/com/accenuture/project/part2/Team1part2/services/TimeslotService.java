@@ -7,54 +7,23 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.accenuture.project.part2.Team1part2.Team1part2Application.timeslots1;
+
+
 @Service
 public class TimeslotService{
 
     @Autowired
     ReservationsService reservationsService;
 
-    List<Timeslot> timeslots = new ArrayList<>();
+    List<Timeslot> timeslots = timeslots1;
     List<Timeslot> chosenTimeslots = new ArrayList<>();
 
     public List<Timeslot> getTimeslots() {
         return timeslots;
-    }
-
-    //creates timeslots and puts them in list
-    public List<Timeslot> createTimeslots(Timeslot timeslot) {
-
-       timeslots.add(timeslot);
-       timeslot.reserve();
-
-       return timeslots;
-    }
-
-    //return reserved timeslots with reservation's help
-    public List<Timeslot> createChosenTimeslotList(Timeslot timeslot) {
-
-        if(reservationsService.getReservationList().contains(timeslot)){
-            chosenTimeslots.add(timeslot);
-        }
-
-        return chosenTimeslots;
-    }
-
-    //given (int day, int month, int year), checks if timeslot is reserved
-    public String checkTimeslotAvailability(int day, int month, int year) {
-
-        for (Timeslot t : timeslots) {
-
-            if (t.getDateOfAppointment().getDayOfMonth() == day & t.getDateOfAppointment().getMonthValue() == month &
-                    t.getDateOfAppointment().getYear() == year) { // chescks if it's in the list a timeslot that exists
-                if (t.isReserved()) {
-                    return "This timeslot is not free to use! Please chose another one!";
-                }
-            }
-        }
-
-        return "This timeslot is free to use!";
 
     }
+
 
     //given (int day, int month, int year), return all unreserved
     public List<Timeslot> showAvailableTimeslots(int day, int month, int year) {
@@ -66,7 +35,7 @@ public class TimeslotService{
             if (t.getDateOfAppointment().getDayOfMonth() == day & t.getDateOfAppointment().getMonthValue() == month &
                     t.getDateOfAppointment().getYear() == year) { // checks if it's in the list a timeslot that exists
 
-                if (!chosenTimeslots.contains(t)) {
+                if (!t.isReserved()) {
                     freeTimeslots.add(t);
                 }
             }
